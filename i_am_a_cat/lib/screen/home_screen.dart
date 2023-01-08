@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('I am a cat'),
+        title: const Text('I am a cat'),
         backgroundColor: Colors.grey[400],
       ),
       body: ListView.separated(
