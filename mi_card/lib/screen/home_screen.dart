@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               name,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontFamily: "pacifico",
                 fontSize: 50,
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               position,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontFamily: "opensans",
                 fontSize: 20,
@@ -81,12 +81,12 @@ class HomeScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ListTile(
             title: Text(phoneNumber),
-            leading: Icon(
+            leading: const Icon(
               Icons.phone,
               color: DEFAULT_COLOR,
             ),
@@ -95,12 +95,12 @@ class HomeScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ListTile(
             title: Text(mail),
-            leading: Icon(
+            leading: const Icon(
               Icons.mail,
               color: DEFAULT_COLOR,
             ),
