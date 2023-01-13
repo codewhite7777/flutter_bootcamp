@@ -10,33 +10,43 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
+            CustomContainer(
               color: Colors.red,
               width: 100,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                CustomContainer(
                   color: Colors.yellow,
                   height: 100,
                   width: 100,
                 ),
-                Container(
+                CustomContainer(
                   color: Colors.lightGreen,
                   height: 100,
                   width: 100,
                 ),
               ],
             ),
-            Container(
+            CustomContainer(
               color: Colors.blue,
               width: 100,
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget CustomContainer(
+      {required double width, double height = 0, required Color color}) {
+    return Container(
+      width: width,
+      height: height,
+      color: color,
     );
   }
 }
