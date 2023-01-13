@@ -9,21 +9,19 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.teal,
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ProfilePart(
-                profilePath: 'asset/images/alee.png',
-                name: 'Lee A Rang',
-                position: 'Flutter Developer',
-              ),
-              DetailPart(
-                phoneNumber: "+82 010 0000 4242",
-                mail: 'codewhite7777@gmail.com',
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ProfilePart(
+              profilePath: 'asset/images/alee.png',
+              name: 'Lee A Rang',
+              position: 'Flutter Developer',
+            ),
+            ContactPart(
+              phoneNumber: "+82 010 0000 4242",
+              mail: 'codewhite7777@gmail.com',
+            ),
+          ],
         ),
       ),
     );
@@ -36,6 +34,7 @@ class HomeScreen extends StatelessWidget {
   }) {
     return Builder(
       builder: (BuildContext context) {
+        double defaultIndent = MediaQuery.of(context).size.width / 5;
         return Column(
           children: [
             CircleAvatar(
@@ -62,8 +61,8 @@ class HomeScreen extends StatelessWidget {
             Divider(
               color: Colors.yellow[300],
               thickness: 1.5,
-              indent: MediaQuery.of(context).size.width / 5,
-              endIndent: MediaQuery.of(context).size.width / 5,
+              indent: defaultIndent,
+              endIndent: defaultIndent,
             ),
           ],
         );
@@ -71,7 +70,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget DetailPart({
+  Widget ContactPart({
     required String phoneNumber,
     required String mail,
   }) {
