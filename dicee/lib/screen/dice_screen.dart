@@ -17,6 +17,7 @@ class _DiceScreenState extends State<DiceScreen> {
       leftDice = Random().nextInt(6) + 1;
       rightDice = Random().nextInt(6) + 1;
     });
+    return null;
   }
 
   @override
@@ -24,7 +25,7 @@ class _DiceScreenState extends State<DiceScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
-        title: Text(
+        title: const Text(
           'Dicee',
           style: TextStyle(color: Colors.white),
         ),
@@ -36,7 +37,7 @@ class _DiceScreenState extends State<DiceScreen> {
 
   Widget DicePart() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Center(
         child: Row(
           children: [
