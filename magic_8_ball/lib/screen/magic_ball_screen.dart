@@ -16,13 +16,14 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
     setState(() {
       answerNumber = Random().nextInt(5) + 1;
     });
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Ask Me Anything',
           style: TextStyle(
             color: Colors.white,
@@ -43,8 +44,8 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: GestureDetector(
-          child: Image.asset('images/ball$answerNumber.png'),
           onTap: onBallPressed,
+          child: Image.asset('images/ball$answerNumber.png'),
         ),
       ),
     );
