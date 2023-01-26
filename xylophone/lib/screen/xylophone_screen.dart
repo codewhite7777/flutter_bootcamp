@@ -47,13 +47,13 @@ class Xylophone_Screen extends StatelessWidget {
           await player.resume();
         },
         child: Container(
+          color: buttonColor,
           child: Text(
             soundName,
             style: TextStyle(
               color: Colors.black.withOpacity(0.7),
             ),
           ),
-          color: buttonColor,
         ),
       ),
     );
