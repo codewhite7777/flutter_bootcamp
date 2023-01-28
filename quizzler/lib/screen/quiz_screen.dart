@@ -78,13 +78,13 @@ class _QuizScreenState extends State<QuizScreen> {
   void onButtonPressed(bool bUserSelection) {
     setState(() {
       bool bAnswer = quizBrain.getQuizAnswer();
+      addReminderIcon(bAnswer, bUserSelection);
       if (quizBrain.isLastQuiz()) {
         ShowAlert(title: 'Quiz Over', content: 'End of Quiz');
         resultReminder.clear();
         quizBrain.moveFirstQuiz();
       } else {
         quizBrain.moveNextQuiz();
-        addReminderIcon(bAnswer, bUserSelection);
       }
     });
   }
