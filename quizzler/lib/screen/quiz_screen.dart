@@ -39,7 +39,7 @@ class _QuizScreenState extends State<QuizScreen> {
       child: Center(
         child: Text(
           quizBrain.getQuizText(),
-          style: TextStyle(color: Colors.white, fontSize: 24),
+          style: const TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
     );
@@ -55,7 +55,7 @@ class _QuizScreenState extends State<QuizScreen> {
             onButtonPressed(true);
           },
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         SelectButton(
@@ -91,12 +91,12 @@ class _QuizScreenState extends State<QuizScreen> {
 
   void addReminderIcon(bool bAnswer, bool bUserSelection) {
     if (bUserSelection == bAnswer) {
-      resultReminder.add(Icon(
+      resultReminder.add(const Icon(
         Icons.check,
         color: Colors.green,
       ));
     } else {
-      resultReminder.add(Icon(
+      resultReminder.add(const Icon(
         Icons.close,
         color: Colors.red,
       ));
@@ -112,7 +112,7 @@ class _QuizScreenState extends State<QuizScreen> {
         actions: [
           CupertinoDialogAction(
             isDefaultAction: true,
-            child: Text("확인"),
+            child: const Text("확인"),
             onPressed: () {
               Navigator.pop(context);
             },

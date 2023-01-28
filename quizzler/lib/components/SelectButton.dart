@@ -16,7 +16,7 @@ class SelectButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(double.infinity, 70),
+        minimumSize: const Size(double.infinity, 70),
         backgroundColor: buttonColor,
       ),
       onPressed: onPressed,
