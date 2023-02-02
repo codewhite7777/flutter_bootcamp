@@ -22,17 +22,32 @@ class _BMI_ScreenState extends State<BMI_Screen> {
             Expanded(
               child: Row(
                 children: [
-                  CustomContainer(backGroundColor: kDefaultContainerColor),
-                  CustomContainer(backGroundColor: kDefaultContainerColor),
+                  CustomContainer(
+                    backGroundColor: kDefaultContainerColor,
+                    childWidget: SizedBox(),
+                  ),
+                  CustomContainer(
+                    backGroundColor: kDefaultContainerColor,
+                    childWidget: SizedBox(),
+                  ),
                 ],
               ),
             ),
-            CustomContainer(backGroundColor: kDefaultContainerColor),
+            CustomContainer(
+              backGroundColor: kDefaultContainerColor,
+              childWidget: SizedBox(),
+            ),
             Expanded(
               child: Row(
                 children: [
-                  CustomContainer(backGroundColor: kDefaultContainerColor),
-                  CustomContainer(backGroundColor: kDefaultContainerColor),
+                  CustomContainer(
+                    backGroundColor: kDefaultContainerColor,
+                    childWidget: SizedBox(),
+                  ),
+                  CustomContainer(
+                    backGroundColor: kDefaultContainerColor,
+                    childWidget: SizedBox(),
+                  ),
                 ],
               ),
             ),
