@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/const/constants.dart';
+import 'package:bmi_calculator/constants/constants.dart';
 import 'package:bmi_calculator/screen/bmi_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: kBackGroundColor,
         appBarTheme: AppBarTheme(
-          backgroundColor: kAppBarColor,
+          color: kBackGroundColor,
         ),
-        scaffoldBackgroundColor: kScaffoldBackColor,
       ),
       home: BMI_Screen(),
     );
