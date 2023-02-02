@@ -1,3 +1,5 @@
+import 'package:bmi_calculator/constants/constants.dart';
+import 'package:bmi_calculator/widget/custom_container.dart';
 import 'package:flutter/material.dart';
 
 class BMI_Screen extends StatefulWidget {
@@ -15,7 +17,35 @@ class _BMI_ScreenState extends State<BMI_Screen> {
         title: Text('BMI CALCULATOR'),
       ),
       body: SafeArea(
-        child: SizedBox(),
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  CustomContainer(backGroundColor: kDefaultContainerColor),
+                  CustomContainer(backGroundColor: kDefaultContainerColor),
+                ],
+              ),
+            ),
+            CustomContainer(backGroundColor: kDefaultContainerColor),
+            Expanded(
+              child: Row(
+                children: [
+                  CustomContainer(backGroundColor: kDefaultContainerColor),
+                  CustomContainer(backGroundColor: kDefaultContainerColor),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('CALCULATE'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: kButtonColor,
+                minimumSize: Size.fromHeight(kButtonMinHeight),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
