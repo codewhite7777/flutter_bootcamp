@@ -10,13 +10,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: kBackGroundColor,
-        appBarTheme: AppBarTheme(
-          color: kBackGroundColor,
+      theme: getThemeData(),
+      home: BMI_Screen(),
+    );
+  }
+
+  ThemeData getThemeData() {
+    return ThemeData.dark().copyWith(
+      scaffoldBackgroundColor: kBackGroundColor,
+      appBarTheme: AppBarTheme(
+        color: kBackGroundColor,
+      ),
+      textTheme: TextTheme(
+        bodyText1: TextStyle(
+          color: kDefaultTextColor,
         ),
       ),
-      home: BMI_Screen(),
     );
   }
 }

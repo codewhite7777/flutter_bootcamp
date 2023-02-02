@@ -2,19 +2,25 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
-class HeightSelector extends StatelessWidget {
+class SliderSelector extends StatelessWidget {
   final String label;
   final double currentValue;
+  final String unit;
   final ValueChanged<double> onChanged;
   final double minHeight;
   final double maxHeight;
+  final double fontSize;
+  final int fractionDigits;
 
-  const HeightSelector({
+  const SliderSelector({
     required this.label,
     required this.currentValue,
+    required this.unit,
     required this.onChanged,
     required this.minHeight,
     required this.maxHeight,
+    this.fontSize = 30,
+    this.fractionDigits = 1,
     Key? key,
   }) : super(key: key);
 
@@ -36,13 +42,13 @@ class HeightSelector extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '${currentValue.toStringAsFixed(1)}',
+              '${currentValue.toStringAsFixed(fractionDigits)}',
               style: TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 70,
+                fontSize: fontSize,
               ),
             ),
-            Text('cm'),
+            Text(unit),
           ],
         ),
         Slider(

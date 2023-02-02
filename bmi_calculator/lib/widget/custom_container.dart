@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class CustomContainer extends StatelessWidget {
   final Color backGroundColor;
+  final Color selectedColor;
   final Widget childWidget;
 
   const CustomContainer({
     required this.backGroundColor,
+    this.selectedColor = Colors.transparent,
     required this.childWidget,
     Key? key,
   }) : super(key: key);
@@ -18,6 +20,9 @@ class CustomContainer extends StatelessWidget {
         child: childWidget,
         margin: EdgeInsets.all(16.0),
         decoration: BoxDecoration(
+          border: Border.all(
+            color: selectedColor,
+          ),
           borderRadius: BorderRadius.circular(16.0),
           color: backGroundColor,
         ),
