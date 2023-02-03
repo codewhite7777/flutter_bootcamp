@@ -15,7 +15,7 @@ class Result_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Your Result',
           style: TextStyle(
             fontSize: 30,
@@ -40,7 +40,7 @@ class Result_Screen extends StatelessWidget {
                   ),
                   Text(
                     data.getBMI.toStringAsFixed(1).toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 120,
                       fontWeight: FontWeight.w800,
                     ),
@@ -49,7 +49,7 @@ class Result_Screen extends StatelessWidget {
                     children: [
                       Text(
                         'You have a ${data.getLevel.name} weight',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24.0,
                         ),
                       ),
@@ -69,11 +69,11 @@ class Result_Screen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('RE-CALCULATE'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: kButtonColor,
-                minimumSize: Size.fromHeight(kButtonMinHeight),
+                minimumSize: const Size.fromHeight(kButtonMinHeight),
               ),
+              child: const Text('RE-CALCULATE'),
             ),
           ],
         ),

@@ -2,7 +2,7 @@ import 'package:bmi_calculator/constants/constants.dart';
 import 'package:bmi_calculator/screen/bmi_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
   ThemeData getThemeData() {
     return ThemeData.dark().copyWith(
       scaffoldBackgroundColor: kBackGroundColor,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         color: kBackGroundColor,
       ),
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         bodyText1: TextStyle(
           color: kDefaultTextColor,
         ),

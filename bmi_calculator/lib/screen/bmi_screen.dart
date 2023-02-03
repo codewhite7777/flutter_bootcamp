@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BMI_Screen extends StatefulWidget {
-  BMI_Screen({Key? key}) : super(key: key);
+  const BMI_Screen({Key? key}) : super(key: key);
 
   @override
   State<BMI_Screen> createState() => _BMI_ScreenState();
@@ -38,94 +38,110 @@ class _BMI_ScreenState extends State<BMI_Screen> {
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
-              child: Row(
-                children: [
-                  CustomContainer(
-                    backGroundColor: (genderType == GenderType.male)
-                        ? kSelectedContainerColor
-                        : kDefaultContainerColor,
-                    selectedColor: (genderType == GenderType.male)
-                        ? kSelectedBorderColor
-                        : kDefaultBorderColor,
-                    childWidget: GenderSelector(
-                      iconData: FontAwesomeIcons.mars,
-                      label: 'MALE',
-                      onTap: () {
-                        updateGender(GenderType.male);
-                      },
-                    ),
-                  ),
-                  CustomContainer(
-                    backGroundColor: (genderType == GenderType.female)
-                        ? kSelectedContainerColor
-                        : kDefaultContainerColor,
-                    selectedColor: (genderType == GenderType.female)
-                        ? kSelectedBorderColor
-                        : kDefaultBorderColor,
-                    childWidget: GenderSelector(
-                      iconData: FontAwesomeIcons.venus,
-                      label: 'FEMALE',
-                      onTap: () {
-                        updateGender(GenderType.female);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            CustomContainer(
-              backGroundColor: kDefaultContainerColor,
-              childWidget: SliderSelector(
-                label: 'HEIGHT',
-                currentValue: height,
-                fontSize: 70,
-                unit: 'cm',
-                minHeight: kMinHeight,
-                maxHeight: kMaxHeight,
-                onChanged: onHeightChanged,
-              ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  CustomContainer(
-                    backGroundColor: kDefaultContainerColor,
-                    childWidget: SliderSelector(
-                      label: 'WEIGHT',
-                      currentValue: weight,
-                      unit: 'Kg',
-                      minHeight: kMinWeight,
-                      maxHeight: kMaxWeight,
-                      onChanged: onWeightChanged,
-                    ),
-                  ),
-                  CustomContainer(
-                    backGroundColor: kDefaultContainerColor,
-                    childWidget: SliderSelector(
-                      label: 'AGE',
-                      currentValue: age.toDouble(),
-                      unit: '',
-                      minHeight: kMinAge,
-                      maxHeight: kMaxAge,
-                      onChanged: onAgeChanged,
-                      fractionDigits: 0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ElevatedButton(
-              onPressed: onCalculate,
-              child: Text('CALCULATE'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kButtonColor,
-                minimumSize: Size.fromHeight(kButtonMinHeight),
-              ),
-            ),
+            TopPart(),
+            MiddlePart(),
+            BottomPart(),
+            ButtonPart(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget TopPart() {
+    return Expanded(
+      child: Row(
+        children: [
+          CustomContainer(
+            backGroundColor: (genderType == GenderType.male)
+                ? kSelectedContainerColor
+                : kDefaultContainerColor,
+            selectedColor: (genderType == GenderType.male)
+                ? kSelectedBorderColor
+                : kDefaultBorderColor,
+            childWidget: GenderSelector(
+              iconData: FontAwesomeIcons.mars,
+              label: 'MALE',
+              onTap: () {
+                updateGender(GenderType.male);
+              },
+            ),
+          ),
+          CustomContainer(
+            backGroundColor: (genderType == GenderType.female)
+                ? kSelectedContainerColor
+                : kDefaultContainerColor,
+            selectedColor: (genderType == GenderType.female)
+                ? kSelectedBorderColor
+                : kDefaultBorderColor,
+            childWidget: GenderSelector(
+              iconData: FontAwesomeIcons.venus,
+              label: 'FEMALE',
+              onTap: () {
+                updateGender(GenderType.female);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget MiddlePart() {
+    return CustomContainer(
+      backGroundColor: kDefaultContainerColor,
+      childWidget: SliderSelector(
+        label: 'HEIGHT',
+        currentValue: height,
+        fontSize: 70,
+        unit: 'cm',
+        minHeight: kMinHeight,
+        maxHeight: kMaxHeight,
+        onChanged: onHeightChanged,
+      ),
+    );
+  }
+
+  Widget BottomPart() {
+    return Expanded(
+      child: Row(
+        children: [
+          CustomContainer(
+            backGroundColor: kDefaultContainerColor,
+            childWidget: SliderSelector(
+              label: 'WEIGHT',
+              currentValue: weight,
+              unit: 'Kg',
+              minHeight: kMinWeight,
+              maxHeight: kMaxWeight,
+              onChanged: onWeightChanged,
+            ),
+          ),
+          CustomContainer(
+            backGroundColor: kDefaultContainerColor,
+            childWidget: SliderSelector(
+              label: 'AGE',
+              currentValue: age.toDouble(),
+              unit: '',
+              minHeight: kMinAge,
+              maxHeight: kMaxAge,
+              onChanged: onAgeChanged,
+              fractionDigits: 0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget ButtonPart() {
+    return ElevatedButton(
+      onPressed: onCalculate,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: kButtonColor,
+        minimumSize: const Size.fromHeight(kButtonMinHeight),
+      ),
+      child: const Text('CALCULATE'),
     );
   }
 
@@ -135,14 +151,14 @@ class _BMI_ScreenState extends State<BMI_Screen> {
         barrierDismissible: true,
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
-          title: Text('Plase Select your Gender'),
+          title: const Text('Plase Select your Gender'),
           actions: [
             CupertinoDialogAction(
-              child: Text('Close'),
               onPressed: () {
                 Navigator.pop(context);
               },
               isDestructiveAction: false,
+              child: const Text('Close'),
             ),
           ],
         ),

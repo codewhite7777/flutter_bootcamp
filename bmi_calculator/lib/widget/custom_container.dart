@@ -17,8 +17,7 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        child: childWidget,
-        margin: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           border: Border.all(
             color: selectedColor,
@@ -26,6 +25,7 @@ class CustomContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.0),
           color: backGroundColor,
         ),
+        child: childWidget,
       ),
     );
   }

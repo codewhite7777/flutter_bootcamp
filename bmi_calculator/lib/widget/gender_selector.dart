@@ -25,7 +25,7 @@ class GenderSelector extends StatelessWidget {
             iconData,
             size: 100,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 24),
           Text(
             label,
             style: TextStyle(

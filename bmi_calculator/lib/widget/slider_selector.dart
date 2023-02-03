@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class SliderSelector extends StatelessWidget {
@@ -42,7 +40,7 @@ class SliderSelector extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '${currentValue.toStringAsFixed(fractionDigits)}',
+              currentValue.toStringAsFixed(fractionDigits),
               style: TextStyle(
                 fontWeight: FontWeight.w800,
                 fontSize: fontSize,

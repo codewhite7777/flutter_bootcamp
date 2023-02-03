@@ -28,7 +28,7 @@ enum GenderType {
   female,
 }
 
-enum ResultType{
+enum ResultType {
   UnderWeight,
   Nomal,
   OverWeight,

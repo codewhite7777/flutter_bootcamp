@@ -20,21 +20,25 @@ class BmiModel {
 
   ResultType get getLevel {
     double result = getBMI;
-    if (result < 18.5)
+    if (result < 18.5) {
       return ResultType.UnderWeight;
-    else if (result < 23)
+    } else if (result < 23) {
       return ResultType.Nomal;
-    else if (result < 25) return ResultType.OverWeight;
+    } else if (result < 25) {
+      return ResultType.OverWeight;
+    }
     return ResultType.Obesity;
   }
 
   String get getAdvise {
     ResultType result = getLevel;
-    if (result == ResultType.UnderWeight)
+    if (result == ResultType.UnderWeight) {
       return 'Gain some weight!';
-    else if (result == ResultType.Nomal)
+    } else if (result == ResultType.Nomal) {
       return 'Good Job!';
-    else if (result == ResultType.OverWeight) return 'Need to lose weight!';
+    } else if (result == ResultType.OverWeight) {
+      return 'Need to lose weight!';
+    }
     return 'Need to go to the hospital!!';
   }
 
