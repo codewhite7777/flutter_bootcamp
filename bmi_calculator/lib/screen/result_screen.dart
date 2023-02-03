@@ -23,9 +23,59 @@ class Result_Screen extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: CustomContainer(
-          backGroundColor: kBackGroundColor,
-          childWidget: SizedBox(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            CustomContainer(
+              backGroundColor: kDefaultContainerColor,
+              childWidget: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    data.getLevel.name,
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: data.getColor,
+                    ),
+                  ),
+                  Text(
+                    data.getBMI.toStringAsFixed(1).toString(),
+                    style: TextStyle(
+                      fontSize: 120,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        'You have a ${data.getLevel.name} weight',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                        ),
+                      ),
+                      Text(
+                        data.getAdvise,
+                        style: TextStyle(
+                          color: data.getColor,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('RE-CALCULATE'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: kButtonColor,
+                minimumSize: Size.fromHeight(kButtonMinHeight),
+              ),
+            ),
+          ],
         ),
       ),
     );
