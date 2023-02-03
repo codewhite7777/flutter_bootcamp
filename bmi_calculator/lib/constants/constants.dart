@@ -27,3 +27,10 @@ enum GenderType {
   male,
   female,
 }
+
+enum ResultType{
+  UnderWeight,
+  Nomal,
+  OverWeight,
+  Obesity,
+}

@@ -25,6 +25,10 @@ class MyApp extends StatelessWidget {
         bodyText1: TextStyle(
           color: kDefaultTextColor,
         ),
+        headlineLarge: TextStyle(
+          color: Colors.white,
+          fontSize: 30,
+        ),
       ),
     );
   }

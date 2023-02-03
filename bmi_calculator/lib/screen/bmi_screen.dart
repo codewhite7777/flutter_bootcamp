@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/constants/constants.dart';
+import 'package:bmi_calculator/screen/result_screen.dart';
 import 'package:bmi_calculator/widget/custom_container.dart';
 import 'package:bmi_calculator/widget/gender_selector.dart';
 import 'package:bmi_calculator/widget/slider_selector.dart';
@@ -22,9 +23,16 @@ class _BMI_ScreenState extends State<BMI_Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final double appbarFontSize =
+        Theme.of(context).textTheme.headlineLarge!.fontSize!;
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: Text(
+          'BMI CALCULATOR',
+          style: TextStyle(
+            fontSize: appbarFontSize,
+          ),
+        ),
       ),
       body: SafeArea(
         child: Column(
@@ -140,13 +148,37 @@ class _BMI_ScreenState extends State<BMI_Screen> {
       );
       return;
     }
-    Navigator.push(context, MaterialPageRoute(builder: builder))
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Result_Screen(
+            result: getResult(
+                weight: weight, height: height, age: age, gender: genderType!)),
+      ),
+    );
     print('gender : $genderType');
     print('age : $age');
     print('height : ${height.toInt()}');
     print('weight : ${weight.toInt()}');
 
     return;
+  }
+
+  ResultType getResult({
+    required double height,
+    required double weight,
+    required int age,
+    required GenderType gender,
+  }) {
+    double result = (weight) / ((height / 100) * (height / 100));
+    if (result < 18.5) {
+      return ResultType.UnderWeight;
+    } else if (result < 23) {
+      return ResultType.Nomal;
+    } else if (result < 25) {
+      return ResultType.OverWeight;
+    }
+    return ResultType.Obesity;
   }
 
   void updateGender(GenderType selectedType) {
