@@ -37,7 +37,8 @@ class SliderSelector extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
               currentValue.toStringAsFixed(fractionDigits),
