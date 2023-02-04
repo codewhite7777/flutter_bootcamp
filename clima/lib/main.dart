@@ -1,3 +1,4 @@
+import 'package:clima/constants/constants.dart';
 import 'package:clima/screen/main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MainScreen(),
+      theme: mainTheme,
     );
   }
 }
