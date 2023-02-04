@@ -1,3 +1,4 @@
+import 'package:clima/components/back_ground_image.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -10,6 +11,12 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Stack(
+        children: [
+          BackGroundImage(imagePath: 'images/city_background.jpg'),
+        ],
+      ),
+    );
   }
 }
