@@ -20,6 +20,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   Position? myPosition;
   WeatherModel? myWeatherData;
+  bool isTargetSearch = false;
+  String searchCity = '';
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,10 @@ class _MainScreenState extends State<MainScreen> {
       body: Stack(
         children: [
           BackGroundImage(imagePath: 'images/location_background.jpg'),
-          FutureBuilder<bool>(
-            future: initNetwork(),
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          FutureBuilder<WeatherModel>(
+            future: getNetworkData(),
+            builder:
+                (BuildContext context, AsyncSnapshot<WeatherModel> snapshot) {
               if (snapshot.hasData) {
                 return RenderingPart();
               }
@@ -43,13 +46,20 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Future<bool> initNetwork() async {
+  Future<WeatherModel> getNetworkData() async {
     myPosition = await getGeolocatorData();
     if (myPosition == null) throw 'Err : Getting Location data filed.';
-    myWeatherData = await getWeatherData(myPosition!);
-    //TODO: delete comment
+    if (isTargetSearch == false) {
+      myWeatherData = await getWeatherData(myPosition!);
+    } else {
+      myWeatherData = await getWeatherData(myPosition!,
+          isSearchTarget: isTargetSearch, searchTargetCity: searchCity);
+      print('search called');
+      print('${myWeatherData!.name}');
+    }
     //print(myWeatherData);
-    return true;
+    print('initNetwork called');
+    return myWeatherData!;
   }
 
   Future<Position> getGeolocatorData() async {
@@ -59,16 +69,26 @@ class _MainScreenState extends State<MainScreen> {
     return pos;
   }
 
-  Future<WeatherModel> getWeatherData(Position myPos) async {
+  Future<WeatherModel?> getWeatherData(Position myPos,
+      {bool isSearchTarget = false, String searchTargetCity = ''}) async {
     ApiModel weatherModel = ApiModel();
-    String getWeatherURL = weatherModel.getCurrentWeatherCall(
-        userPosition: myPos, key: kOpenWeatherMapKey);
+    String getWeatherURL;
+    if (isSearchTarget == true) {
+      //TODO : delete comment
+      print('search city : $searchTargetCity');
+      getWeatherURL = weatherModel.getSearchWeatherCall(
+          city: searchTargetCity, key: kOpenWeatherMapKey);
+    } else {
+      getWeatherURL = weatherModel.getCurrentWeatherCall(
+          userPosition: myPos, key: kOpenWeatherMapKey);
+    }
+
     Uri url = Uri.parse(getWeatherURL);
     var response = await http.get(url);
     //TODO: delete comment
-    //print(url);
+    print(url);
     if (response.statusCode != 200) {
-      throw 'Err : Getting Weather data filed.';
+      return null; //throw 'Err : Getting Weather data filed.';
     }
     var jsonResponse = convert.jsonDecode(response.body);
     return WeatherModel(
@@ -97,7 +117,7 @@ class _MainScreenState extends State<MainScreen> {
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        initNetwork();
+                        isTargetSearch = false;
                       });
                     },
                     icon: Icon(FontAwesomeIcons.locationArrow),
@@ -108,8 +128,15 @@ class _MainScreenState extends State<MainScreen> {
                     onPressed: () async {
                       final temp =
                           await Navigator.pushNamed(context, '/search');
-                      if (temp == null) return;
-                      print('update');
+                      if (temp == null) {
+                        //TODO : delete comment
+                        //print('Invaild City ');
+                        return;
+                      }
+                      setState(() {
+                        isTargetSearch = true;
+                        searchCity = temp.toString();
+                      });
                     },
                     icon: Icon(FontAwesomeIcons.treeCity),
                     iconSize: 40,
