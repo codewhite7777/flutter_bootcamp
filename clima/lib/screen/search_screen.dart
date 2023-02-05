@@ -1,4 +1,5 @@
 import 'package:clima/components/back_ground_image.dart';
+import 'package:clima/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          BackGroundImage(imagePath: 'images/city_background.jpg'),
+          const BackGroundImage(imagePath: 'images/city_background.jpg'),
           SearchPart(),
         ],
       ),
@@ -29,15 +30,10 @@ class _SearchScreenState extends State<SearchScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SearchField(onChanged: onSearchFieldChanged),
-          GetWeather(onPressed: onGetWeatherPressed),
+          GetWeatherButton(onPressed: onGetWeatherPressed),
         ],
       ),
     );
-  }
-
-  void onGetWeatherPressed() {
-    Navigator.pop(context, searchTarget);
-    return;
   }
 
   void onSearchFieldChanged(String value) {
@@ -52,39 +48,27 @@ class _SearchScreenState extends State<SearchScreen> {
         onChanged: onChanged,
         cursorColor: Colors.grey,
         maxLines: 1,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
         ),
-        decoration: InputDecoration(
-          hintText: 'Enter city name',
-          icon: Icon(
-            Icons.location_city_outlined,
-            color: Colors.white,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(
-              color: Colors.red,
-              width: 20,
-              style: BorderStyle.solid,
-            ),
-          ),
-        ),
+        decoration: kSearchFieldDecoration,
       ),
     );
   }
 
-  Widget GetWeather({required VoidCallback onPressed}) {
+  void onGetWeatherPressed() {
+    Navigator.pop(context, searchTarget);
+    return;
+  }
+
+  Widget GetWeatherButton({required VoidCallback onPressed}) {
+    final TextStyle? textStyle = Theme.of(context)!.textTheme.bodyText2;
     return TextButton(
+      onPressed: onPressed,
       child: Text(
         'Get Weather',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 40.0,
-          fontWeight: FontWeight.bold,
-        ),
+        style: textStyle,
       ),
-      onPressed: onPressed,
     );
   }
 }

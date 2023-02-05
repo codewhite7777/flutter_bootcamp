@@ -1,4 +1,3 @@
-import 'package:clima/constants/constants.dart';
 import 'package:clima/screen/main_screen.dart';
 import 'package:clima/screen/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,4 +20,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-ThemeData mainTheme = ThemeData.dark().copyWith();
+ThemeData mainTheme = ThemeData.dark().copyWith(
+  textTheme: TextTheme(
+    bodyText2: TextStyle(
+      color: Colors.white,
+      fontSize: 40.0,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'spartanmb',
+    ),
+  ),
+);
