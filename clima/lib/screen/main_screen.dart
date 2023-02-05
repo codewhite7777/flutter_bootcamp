@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
             future: getNetworkData(),
             builder:
                 (BuildContext context, AsyncSnapshot<WeatherModel> snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.hasData || snapshot.hasError) {
                 return RenderingPart();
               }
               return SpinKitFadingCube(
@@ -54,10 +54,11 @@ class _MainScreenState extends State<MainScreen> {
     } else {
       myWeatherData = await getWeatherData(myPosition!,
           isSearchTarget: isTargetSearch, searchTargetCity: searchCity);
+      //TODO : delete comment
       print('search called');
       print('${myWeatherData!.name}');
     }
-    //print(myWeatherData);
+    //TODO : delete comment
     print('initNetwork called');
     return myWeatherData!;
   }
@@ -74,8 +75,6 @@ class _MainScreenState extends State<MainScreen> {
     ApiModel weatherModel = ApiModel();
     String getWeatherURL;
     if (isSearchTarget == true) {
-      //TODO : delete comment
-      print('search city : $searchTargetCity');
       getWeatherURL = weatherModel.getSearchWeatherCall(
           city: searchTargetCity, key: kOpenWeatherMapKey);
     } else {
@@ -86,9 +85,9 @@ class _MainScreenState extends State<MainScreen> {
     Uri url = Uri.parse(getWeatherURL);
     var response = await http.get(url);
     //TODO: delete comment
-    print(url);
+    //print(url);
     if (response.statusCode != 200) {
-      return null; //throw 'Err : Getting Weather data filed.';
+      throw 'Err : Getting Weather data filed.';
     }
     var jsonResponse = convert.jsonDecode(response.body);
     return WeatherModel(
