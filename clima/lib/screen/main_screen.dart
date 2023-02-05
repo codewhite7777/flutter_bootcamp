@@ -105,9 +105,11 @@ class _MainScreenState extends State<MainScreen> {
                     hoverColor: Colors.red,
                   ),
                   IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/search');
-                      print('Search Button');
+                    onPressed: () async {
+                      final temp =
+                          await Navigator.pushNamed(context, '/search');
+                      if (temp == null) return;
+                      print('update');
                     },
                     icon: Icon(FontAwesomeIcons.treeCity),
                     iconSize: 40,
