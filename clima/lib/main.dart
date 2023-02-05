@@ -2,7 +2,7 @@ import 'package:clima/screen/main_screen.dart';
 import 'package:clima/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => MainScreen(),
-        '/search': (context) => SearchScreen(),
+        '/': (context) => const MainScreen(),
+        '/search': (context) => const SearchScreen(),
       },
       theme: mainTheme,
     );
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 ThemeData mainTheme = ThemeData.dark().copyWith(
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     bodyText2: TextStyle(
       color: Colors.white,
       fontSize: 40.0,

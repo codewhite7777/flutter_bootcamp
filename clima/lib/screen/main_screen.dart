@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          BackGroundImage(imagePath: 'images/location_background.jpg'),
+          const BackGroundImage(imagePath: 'images/location_background.jpg'),
           FutureBuilder<WeatherModel>(
             future: getNetworkData(),
             builder:
@@ -54,12 +54,7 @@ class _MainScreenState extends State<MainScreen> {
     } else {
       myWeatherData = await getWeatherData(myPosition!,
           isSearchTarget: isTargetSearch, searchTargetCity: searchCity);
-      //TODO : delete comment
-      print('search called');
-      print('${myWeatherData!.name}');
     }
-    //TODO : delete comment
-    print('initNetwork called');
     return myWeatherData!;
   }
 
@@ -84,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
 
     Uri url = Uri.parse(getWeatherURL);
     var response = await http.get(url);
-    //TODO: delete comment
+    //TODO: it's for debug - request http
     //print(url);
     if (response.statusCode != 200) {
       throw 'Err : Getting Weather data filed.';
@@ -109,106 +104,135 @@ class _MainScreenState extends State<MainScreen> {
         ),
         child: Column(
           children: [
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isTargetSearch = false;
-                      });
-                    },
-                    icon: Icon(FontAwesomeIcons.locationArrow),
-                    iconSize: 40,
-                    hoverColor: Colors.red,
-                  ),
-                  IconButton(
-                    onPressed: () async {
-                      final temp =
-                          await Navigator.pushNamed(context, '/search');
-                      if (temp == null) {
-                        //TODO : delete comment
-                        //print('Invaild City ');
-                        return;
-                      }
-                      setState(() {
-                        isTargetSearch = true;
-                        searchCity = temp.toString();
-                      });
-                    },
-                    icon: Icon(FontAwesomeIcons.treeCity),
-                    iconSize: 40,
-                  ),
-                ],
-              ),
+            AppBarPart(
+              flex: 1,
+              onUpdateLocation: onUpdateLocation,
+              onSearchLocation: onSearchLocation,
             ),
-            Expanded(
-              flex: 8,
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          getWeatherIcon(myWeatherData!.id),
-                          style: TextStyle(fontSize: 70),
-                          textAlign: TextAlign.right,
-                        ),
-                        SizedBox(width: 10),
-                        AnimatedTextKit(
-                          animatedTexts: [
-                            WavyAnimatedText(
-                              getWeatherDetail(myWeatherData!.id),
-                            ),
-                          ],
-                          isRepeatingAnimation: true,
-                          repeatForever: true,
-                          onTap: null,
-                        ),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      textBaseline: TextBaseline.alphabetic,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                    ),
-                    Text(
-                      '${myWeatherData!.temp.toStringAsFixed(1)}°',
-                      style: TextStyle(
-                        fontSize: 80.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          '${getMessage(myWeatherData!.temp.toInt())}',
-                          style: TextStyle(
-                            fontFamily: 'spartanmb',
-                            fontSize: 50.0,
-                          ),
-                          textAlign: TextAlign.end,
-                        ),
-                        (myWeatherData!.name != '')
-                            ? Text(
-                                'in\n${myWeatherData!.name}!',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontFamily: 'spartanmb',
-                                  fontSize: 50.0,
-                                ),
-                              )
-                            : Text(''),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            ContentPart(flex: 8),
           ],
         ),
       ),
+    );
+  }
+
+  void onUpdateLocation() {
+    setState(() {
+      isTargetSearch = false;
+    });
+  }
+
+  void onSearchLocation() async {
+    final temp = await Navigator.pushNamed(context, '/search');
+    if (temp == null) {
+      return;
+    }
+    setState(() {
+      isTargetSearch = true;
+      searchCity = temp.toString();
+    });
+  }
+
+  Widget AppBarPart({
+    required int flex,
+    required VoidCallback onUpdateLocation,
+    required VoidCallback onSearchLocation,
+  }) {
+    return Expanded(
+      flex: flex,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            onPressed: onUpdateLocation,
+            icon: const Icon(FontAwesomeIcons.locationArrow),
+            iconSize: 40,
+          ),
+          IconButton(
+            onPressed: onSearchLocation,
+            icon: const Icon(FontAwesomeIcons.treeCity),
+            iconSize: 40,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget ContentPart({required int flex}) {
+    return Expanded(
+      flex: flex,
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            WeatherIcon(),
+            WeatherTemperature(),
+            WeatherTip(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget WeatherIcon() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      textBaseline: TextBaseline.alphabetic,
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      children: [
+        Text(
+          getWeatherIcon(myWeatherData!.id),
+          style: const TextStyle(fontSize: 70),
+          textAlign: TextAlign.right,
+        ),
+        const SizedBox(width: 10),
+        AnimatedTextKit(
+          animatedTexts: [
+            WavyAnimatedText(
+              getWeatherDetail(myWeatherData!.id),
+            ),
+          ],
+          isRepeatingAnimation: true,
+          repeatForever: true,
+          onTap: null,
+        ),
+      ],
+    );
+  }
+
+  Widget WeatherTemperature() {
+    return Text(
+      '${myWeatherData!.temp.toStringAsFixed(1)}°',
+      style: const TextStyle(
+        fontSize: 80.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget WeatherTip() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          '${getMessage(myWeatherData!.temp.toInt())}',
+          style: const TextStyle(
+            fontFamily: 'spartanmb',
+            fontSize: 50.0,
+          ),
+          textAlign: TextAlign.end,
+        ),
+        (myWeatherData!.name != '')
+            ? Text(
+                'in\n${myWeatherData!.name}!',
+                textAlign: TextAlign.end,
+                style: const TextStyle(
+                  fontFamily: 'spartanmb',
+                  fontSize: 50.0,
+                ),
+              )
+            : const Text(''),
+      ],
     );
   }
 
